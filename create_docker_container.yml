@@ -1,0 +1,15 @@
+---
+  - hosts: web
+    become: true
+    tasks:
+     - name: stop previous version docker
+       shell: docker stop tomcat_web
+     - name: remove stopped container
+       shell: docker rm -f tomcat_web
+     - name: remove docker images
+       shell: docker image rm -f nahidete2019/tomcat_web
+       
+     - name: pull docker images
+       shell: docker pull nahidete2019/tomcat_web
+     - name: create docker container
+       shell: docker run -d --name tomcat_web -p 8090:8080 nahidete2019/tomcat_web
