@@ -3,13 +3,17 @@
     become: true
     tasks:
      - name: stop previous version docker
-       shell: docker stop tomcat_web
+       shell: docker stop web_app
+       ignore_errors: yes
+       
      - name: remove stopped container
-       shell: docker rm -f tomcat_web
+       shell: docker rm -f web_app
+       ignore_errors: yes
      - name: remove docker images
-       shell: docker image rm -f nahidete2019/tomcat_web
+       shell: docker image rm -f nahidete2019/web_app
+       ignore_errors: yes
        
      - name: pull docker images
-       shell: docker pull nahidete2019/tomcat_web
+       shell: docker pull nahidete2019/web_app
      - name: create docker container
-       shell: docker run -d --name tomcat_web -p 8090:8080 nahidete2019/tomcat_web
+       shell: docker run -d --name web_app -p 8090:8080 nahidete2019/web_app
